@@ -2,4 +2,4 @@ Diese kleine Anwendung synchronisiert zwei Divera-Organisationen miteinander. Al
 
 Dafür in der config.ini beide API-Tokens eintragen.
 
-![image](https://user-images.githubusercontent.com/52480593/177002547-ddb10699-2fe8-495e-a74c-de0a9e481e23.png)
+![image](https://user-images.githubusercontent.com/52480593/177002617-4756ddfb-5290-435d-a99b-465d533e948a.png)
