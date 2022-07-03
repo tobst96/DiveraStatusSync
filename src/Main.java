@@ -14,7 +14,7 @@ import java.util.Properties;
 
 public class Main extends Thread {
     public static void main(String[] args) throws ParseException, IOException {
-        System.out.println("Starte Syncronisation :)");
+        System.out.println("Starte Syncronisation");
         while(true) {
             Properties prop = new Properties();
             String fileName = "config.ini";
@@ -28,45 +28,45 @@ public class Main extends Thread {
             String token1 = prop.getProperty("diveratoken1");
             String token2 = prop.getProperty("diveratoken2");
 
-            String responetextIUK = RequetsGet.requetsData("https://app.divera247.com/api/v2/pull/vehicle-status?accesskey=" + token1);
-            String responetextWST = RequetsGet.requetsData("https://app.divera247.com/api/v2/pull/vehicle-status?accesskey=" + token2);
-            //System.out.println(responetextIUK);
-            //System.out.println(responetextWST);
-            Files.writeString(Path.of("einheit2.json"), responetextIUK, StandardCharsets.UTF_8);
-            Iterator listWST = null;
+            String responetextEinh1 = RequetsGet.requetsData("https://app.divera247.com/api/v2/pull/vehicle-status?accesskey=" + token1);
+            String responetextEinh2 = RequetsGet.requetsData("https://app.divera247.com/api/v2/pull/vehicle-status?accesskey=" + token2);
+            //System.out.println(responetextEinh1);
+            //System.out.println(responetextEinh2);
+            Files.writeString(Path.of("einheit2.json"), responetextEinh1, StandardCharsets.UTF_8);
+            Iterator listEinh2 = null;
             try {
-                listWST = diveraDataList(responetextWST);
+                listEinh2 = diveraDataList(responetextEinh2);
             } catch (ParseException e) {
                 throw new RuntimeException(e);
             }
-            Iterator listIUK = null;
+            Iterator listEinh1 = null;
             try {
-                listIUK = diveraDataList(responetextIUK);
+                listEinh1 = diveraDataList(responetextEinh1);
             } catch (ParseException e) {
                 throw new RuntimeException(e);
             }
             try {
-                checkWST(listWST, listIUK);
+                checkEinh2(listEinh2, listEinh1);
             } catch (ParseException e) {
                 throw new RuntimeException(e);
             }
         }
     }
 
-    private static void checkWST(Iterator wstInput, Iterator iukInput) throws ParseException, IOException {
-        String issiWST;
-        String nameWST;
-        Long statusWST;
-        Long tsWST;
+    private static void checkEinh2(Iterator Einh2Input, Iterator Einh1Input) throws ParseException, IOException {
+        String issiEinh2;
+        String nameEinh2;
+        Long statusEinh2;
+        Long tsEinh2;
 
-        while (wstInput.hasNext()) {
-            JSONObject slide = (JSONObject) wstInput.next();
-            issiWST = (String) slide.get("issi");
-            nameWST = (String) slide.get("name");
-            statusWST = (Long) slide.get("fmsstatus");
-            tsWST = (Long) slide.get("fmsstatus_ts");
-            //System.out.println("Einheit 1: " + issiWST + " | " + nameWST + " | " + statusWST + " | " + tsWST);
-            checkDifferncesDivera.IUK(iukInput, issiWST, nameWST, statusWST, tsWST);
+        while (Einh2Input.hasNext()) {
+            JSONObject slide = (JSONObject) Einh2Input.next();
+            issiEinh2 = (String) slide.get("issi");
+            nameEinh2 = (String) slide.get("name");
+            statusEinh2 = (Long) slide.get("fmsstatus");
+            tsEinh2 = (Long) slide.get("fmsstatus_ts");
+            //System.out.println("Einheit 1: " + issiEinh2 + " | " + nameEinh2 + " | " + statusEinh2 + " | " + tsEinh2);
+            checkDifferncesDivera.Einh1(Einh1Input, issiEinh2, nameEinh2, statusEinh2, tsEinh2);
         }
     }
 

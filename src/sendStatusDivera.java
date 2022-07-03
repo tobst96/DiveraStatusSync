@@ -4,11 +4,11 @@ public class sendStatusDivera {
             String[] words = issi.split(",");
             for (String word : words) {
                 String url2 = "https://www.divera247.com/api/fms?status_id=" + status + "&vehicle_issi=" + word + "&accesskey=" + token;
-                String responetextWST = RequetsGet.requetsData(url2);
+                String responetextEinh2 = RequetsGet.requetsData(url2);
             }
         } catch (Exception e) {
             String urlok = "https://www.divera247.com/api/fms?status_id=" + status + "&vehicle_issi=" + issi + "&accesskey=" + token;
-            String responetextWST = RequetsGet.requetsData(urlok);
+            String responetextEinh2 = RequetsGet.requetsData(urlok);
             throw new RuntimeException(e);
         }
 
